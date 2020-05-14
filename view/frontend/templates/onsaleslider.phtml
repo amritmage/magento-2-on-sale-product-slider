@@ -1,0 +1,63 @@
+<?php
+/* @var $block \Magestar\OnSale\Block\OnSaleSlider  */
+?>
+<?php if($items = $block->getProductData()) { ?>
+    <div class="onsaleslider row">
+        <div class="col-sm-3 text-center">
+            <a href="<?php echo $block->getBaseUrl() . 'special-offers' ?>">
+                <p class="offer-special"><?= __('SPECIAL OFFERS')?></p>
+            </a>
+        </div>
+        <div class="col-sm-9 slider-arrows2">
+            <div id="onsale-slide">
+                <?php
+                $i = 0;
+                /* @var $_product \Magento\Catalog\Model\Product */
+                foreach ($items as $_product) {
+                    $imageType = 'onsale_slider_image';
+                    $image = $block->getImage($_product, $imageType);
+
+                    /*
+                    $prices = $_product->getPriceInfo();
+                    $specialPrice = $prices->getPrice('special_price')->getAmount()->getValue();
+                    */
+                    $specialPrice = $_product->getFinalPrice();
+                    $finalPrice = $_product->getPrice();
+
+                ?>
+                    <div class="col-sm-12 osl-item" style="<?php if($i!=0){ echo 'display:none;'; }; ?>">
+                        <a class="Pr-img" href="<?= $_product->getProductUrl(); ?>">
+                            <img class="lazyOwl" data-src="<?= $image->getImageUrl(); ?>"
+                                 alt="<?= $_product->getName(); ?>"
+                                 title="<?= $_product->getName(); ?>">
+                        </a>
+                        <a class="Pr-name" href="<?= $_product->getProductUrl(); ?>">
+                            <p class="slide-pname"><?= $_product->getName(); ?></p>
+                            <span class="offer-price">
+                                <span class="nowOnly"><?= __('NOW ONLY') ?>
+                                <?= $block->getFormatedPrice($specialPrice); ?></span>
+                                <?= __('inc VAT (usually %1)', $block->getFormatedPrice($finalPrice)); ?>
+                            </span>
+                        </a>
+                    </div>
+                <?php
+                    $i++;
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#onsale-slide": {
+                "Magestar_OnSale/js/owl-carousel": {
+                    "autoPlay": false,
+                    "navigation": true,
+                    "lazyLoad": true,
+                    "itemsCustom": [[0, 1],[450, 2],[600, 3],[700, 2],[1000, 1],[1200, 1],[1400, 1],[1600, 1]],
+                    "responsiveRefreshRate": 50
+                }
+            }
+        }
+    </script>
+<?php } ?>
