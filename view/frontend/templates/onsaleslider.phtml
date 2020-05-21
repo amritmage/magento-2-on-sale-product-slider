@@ -14,16 +14,10 @@
                 $i = 0;
                 /* @var $_product \Magento\Catalog\Model\Product */
                 foreach ($items as $_product) {
-                    $imageType = 'onsale_slider_image';
+                    $imageType = 'product_thumbnail_image';
                     $image = $block->getImage($_product, $imageType);
-
-                    /*
-                    $prices = $_product->getPriceInfo();
-                    $specialPrice = $prices->getPrice('special_price')->getAmount()->getValue();
-                    */
                     $specialPrice = $_product->getFinalPrice();
                     $finalPrice = $_product->getPrice();
-
                 ?>
                     <div class="col-sm-12 osl-item" style="<?php if($i!=0){ echo 'display:none;'; }; ?>">
                         <a class="Pr-img" href="<?= $_product->getProductUrl(); ?>">
