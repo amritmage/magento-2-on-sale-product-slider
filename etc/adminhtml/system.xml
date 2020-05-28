@@ -4,7 +4,7 @@
         <tab id="Magestar" translate="label" sortOrder="15">
             <label>Magestar</label>
         </tab>
-        <section id="onsale" translate="label" type="text" sortOrder="715" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="onsale" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>On Sale Slider</label>
             <tab>Magestar</tab>
             <resource>Magestar_OnSale::config</resource>
